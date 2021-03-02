@@ -8,6 +8,14 @@ void print_error_messages() {
     printf("\t3\tEnter: \"./a.out zyrafa < input_file.txt\"\n");
 }
 
+size_t strlen(const char *str)
+{
+    const char *p = str;
+    while (*p != '\0')
+        ++p;
+    return p - str;
+}
+
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         print_error_messages();
@@ -15,14 +23,17 @@ int main(int argc, char *argv[]) {
     }
 
     int c, line_number, word_index, found;
+    
     line_number = 1;
     word_index = 0;
     found = 0;
 
+    size_t searched_word_length = strlen(argv[1]);
+
     while ((c = getchar()) != EOF) {
         if (found == 0) {
             if (c == argv[1][word_index]) {
-                if (word_index == (sizeof(argv[1]) - 3)) {
+                if (word_index == (searched_word_length - 1)) {
                     printf("%d\n", line_number);
                     found = 1;
                 } else {

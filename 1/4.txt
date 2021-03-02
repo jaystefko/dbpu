@@ -1,0 +1,72 @@
+Z wyniku 4.c na moim komputerze:
+Sizeof char: 1
+Sizeof short: 2
+Sizeof int: 4
+Sizeof long: 8
+Sizeof long long: 8
+
+Natomiast jak chodzi o pełniejszą odpowiedź to nie będę
+przepisywać, tylko wkleję link dla zaoszczędzenia Panu czasu:
+https://www.tutorialspoint.com/cprogramming/c_data_types.htm
+
+Wynik c1-1.cpp bez żadnych zmian:
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+*** stack smashing detected ***: terminated
+Aborted (core dumped)
+
+Wynik c1-1.cpp po:
+1. Zmianie typu z int na long:
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+*** stack smashing detected ***: terminated
+Aborted (core dumped)
+2. Zmianie rozmiaru pierwszej tablicy (wracam na int oba, długość 1wszej dodaję zero tak żeby było 100)
+-794631768
+32746
+-794636608
+32746
+6
+234
+-794584768
+32746
+-794587616
+32746
+3. Przy kompilacji z opcją "-O0"
+bez zmian z oryginałem
+4.Przy kompilacji z opcją "-03"
+a) występuje takie ostrzeżenie przy kompilacji
+c1-1.cpp: In function ‘int main()’:
+c1-1.cpp:9:30: warning: iteration 10 invokes undefined behavior [-Waggressive-loop-optimizations]
+    9 |  for(int i=0;i<30;i++) abc[i]=i;
+      |                        ~~~~~~^~
+c1-1.cpp:9:15: note: within this loop
+    9 |  for(int i=0;i<30;i++) abc[i]=i;
+      |              ~^~~
+b) taki jest wynik
+1
+0
+2
+0
+1
+0
+438707117
+21874
+0
+0
