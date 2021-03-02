@@ -14,10 +14,30 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    int c;
+    int c, line_number, word_index, found;
+    line_number = 1;
+    word_index = 0;
+    found = 0;
 
     while ((c = getchar()) != EOF) {
-        putchar(c);
+        if (found == 0) {
+            if (c == argv[1][word_index]) {
+                if (word_index == (sizeof(argv[1]) - 3)) {
+                    printf("%d\n", line_number);
+                    found = 1;
+                } else {
+                    word_index += 1;
+                }
+            } else if (word_index != 0) {
+                word_index = 0;
+            }
+        }
+
+        if (c == '\n') {
+            line_number += 1;
+            word_index = 0;
+            found = 0;
+        }
     }
 
     return 0;
