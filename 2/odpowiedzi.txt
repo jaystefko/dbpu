@@ -27,3 +27,6 @@ W C można to zrobić zarówno przez wskaźnik jak i wartość, natomiast są
 też języki (przykładowo JS) które przekazują tylko przez wartość.
 Prawdopodobnie są też inne kąbinacje, ale te 2 języki znam
 na tyle że mogę się bezpiecznie na ten temat wypowiadać.
+Mógłbym napisać pseudokod to tego, ale napisałem po prostu program obrazujący
+te 2 sposoby w C o nazwye `5.c`.
+Także C to mój pseudokod :)
