@@ -2,7 +2,7 @@
 
 ## Laboratorium 1 — zadania
 
-Po zakończeniu pracy należy zachować wszystkie stworzone pliki w oddzielnym podkatalogu (np. dbpu-l1) wraz z raportem wykonanej pracy (numer indeksu/numery indeksów autora/autorów, krótki opis każdego pliku, w przypadku plików źródłowych instrukcja wykorzystania, nie załączać plików projektów!). Jeżeli nie zostanie podane inaczej, to zadania należy wykonywać samodzielnie lub w grupach dwuosobowych, przy czym w przypadku grup obydwie osoby powinny rozumieć prezentowane rozwiązanie (i mieć dostęp do wspomnianych plików)!
+Po zakończeniu pracy należy zachować wszystkie stworzone pliki w oddzielnym podkatalogu (np. dbpu-l1) wraz z raportem wykonanej pracy (numer indeksu/numery indeksów autora/autorów, krótki opis każdego pliku, w przypadku plików źródłowych instrukcja wykorzystania, nie załączać plików projektów!). Jeżeli nie zostanie podane inaczej, to zadania należy wykonywać samodzielnie lub w grupach dwuosobowych, przy czym w przypadku grup obydwie osoby powinny rozumieć prezentowane rozwiązanie (i mieć dostęp do wspomnianych plików)!  
 Uwaga: zadania z pierwszych ćwiczeń należy spakować (np. tar cjf numer_indeksu.tb2 dbpu-l1) i przesłać do prowadzącego (temat e-maila DBPU L1 numer indeksu - Imię Nazwisko, w przypadku prac wspólnych numery i nazwiska oddzielać przecinkiem).
 
 ## Zadanie 1

@@ -1,0 +1,484 @@
+
+<HTML>
+
+    <HEAD>
+    
+    <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=iso-8859-2">
+    <META NAME="keywords" CONTENT="inline assembler,inline asm,asm,gcc,
+    assembler,tut,tutorial,pol,guide,asembler,linux,optimization,optimisation,optymalizacja,wprowadzenie">
+    <META NAME="description" CONTENT="Krótki wstęp do programowania w
+    gcc z wykorzystaniem assemblera">
+    <META NAME="author" CONTENT="A.D.Danilecki, szopen">
+    <META NAME="generator" CONTENT="vi, bo kto ma jaja ten używa vijaja">
+    
+    <ADDRESS>A.D.Danilecki, Poznan, Polska <BR>
+    Politechnika Poznanska, Wydzial Informatyki i Zarzadzania<BR>
+    W tej chwili adanilecki _malpa_ cs.put.poznan.pl <BR>
+    Z wykorzystaniem wielu listow z uwagami od <a href="autorzy.php"> wielu autorow </a>
+    </ADDRESS>
+    
+    <TITLE> Krótki wstęp do programowania z wykorzystaniem inline assemblera x86</TITLE>
+    </HEAD>
+    
+    <BODY>
+    
+    
+    <BR><HR><BR>
+    
+    <H2> <CENTER> <A NAME="Punkt3"> 4. Punkt Trzeci : Moje pierwsze programiki 
+    </A> </CENTER> </H2>
+    <BR>
+    <!--?php
+    include ("http://www.cs.put.poznan.pl/adanilecki/inline_asm/navigator_up.php?name=$PHP_SELF");
+    ?-->
+    <P>
+    <SMALL> <DL> <DD> 
+    <A HREF="#p1"> Przykład pierwszy </A><BR>
+    <A HREF="#p2"> Przykład drugi </A><BR>
+    <A HREF="#p3"> Przykład trzeci </A><BR>
+    <A HREF="#p4"> Przykład czwarty </A><BR>
+    <A HREF="#p5"> Przykład piąty </A><BR>
+    <A HREF="#p6"> Przykład szósty </A><BR>
+    <A HREF="#p7"> Przykład siódmy </A><BR>
+    <A HREF="#p8"> Przykład ósmy </A><BR>
+    <A HREF="test.php#p9"> Przykład dziewiąty </A><BR>
+    
+    </DL> </SMALL>
+    <P>
+    Teraz napiszemy kilka programików które krok po kroku nauczą nas jak 
+    pisać w assemblerze pod Linuxem za pomocą gcc.
+    <BR><BR>
+    
+    
+    <A NAME="p1"><CENTER> <H3> Przykład pierwszy : </H3></CENTER></A>
+    
+    <strong> pierwszy.c </strong> <br>
+    <tt>
+    <br>
+    <em>
+    void </em> main() <br>
+    {<br>
+    <em> asm </em> (<br>
+        "<A HREF="dodg.php#nop"> nop </a>"<br>
+        );<br>
+    }<br>
+    <br>
+    </tt><br>
+    <p>
+    Wszystko pomiędzy '(' i ')' jest traktowane jako instrukcje assemblerowe.
+    w tym wypadku instrukcja ta to 'nop' ktora jest odpowiednikiem 'instrukcji
+    pustej' z C, tzn. nie wykonująca żadnej akcji. Tak więc sam program oczywiście 
+    również nic nie robi.<br>
+    <dd>	Program kompilujemy w następujący sposób:	<br>
+    <br>
+    gcc pierwszy.c -o a.out<br>
+    <br>
+    i wywołujemy następująco:<br>
+    <br>
+    ./a.out <br>
+    <p>
+    Efekt programu? Oczywiście żaden :-) Obejrzyjmy sobie tylko jego przekład na assembler
+    przez gcc. <br> <tt> gcc -S pierwszy.c -o pierwszy.s </tt> <br> i potem
+    oczywiście vi pierwszy.s. Podobnie najlepiej postąpisz z każdym programem, który
+    będziesz pisał, dzięki temu szybko będziesz w stanie poprawiać błędy i uczyć się
+    asma.
+    <br>
+    
+    <A NAME="p2"><CENTER> <H3> Przykład drugi:</H3></CENTER></A>
+    
+    <A NAME="input"> <P><DD>
+    
+    Pokażemy </A> teraz w jaki sposób z poziomu assemblera odwoływać się do zmiennych lokalnych.
+    Do zmiennych globalnych, jak wiemy, możemy się odwoływać prosto, za pomocą nazwy.
+    Jeżeli chcemy odwoływać się do zmiennych lokalnych, czynimy to w następujący sposób:
+    <br> <tt> asm("...." : : "jakaś litera" (nazwa zmiennej) , ...) </tt> <br>
+    Na przykład chcąc mieć dostęp do zmiennej a, mogę napisać 
+    <br><tt> asm("..":: "q" (a) ); </tt> </br>. Do zmiennej tej mogę się odwoływać
+    za pomocą %(numer). Tutaj napisalibyśmy %0. Gdybyśmy napisali tak:
+    <br> <tt> asm(".."::"q" (a) "g" (b) ); </tt> <br> to do zmiennej a odwoływalibyśmy się
+    za pomocą %0 a do zmiennej b za pomocą %1. Proste nieprawdaż? Wyjaśnienia tylko wyjaśniają
+    tylko te literki których użyliśmy w cudzysłowiach. Za ich pomocą mówimy gcc
+    gdzie ma przechować nasze zmienne. I tak : <br>
+    <A NAME="rej">    </A>
+    <DL>
+    <dt> "a" <dd> oznacza rejestr eax
+    <dt> "b" <dd> oznacza rejestr ebx
+    <dt> "c" <dd> oznacza rejestr ecx
+    <dt> "d" <dd> oznacza rejestr edx
+    <dt> "S" <dd> oznacza esi
+    <dt> "D" <dd> oznacza edi
+    <dt>  "I" <dd> oznacza stałą
+    <dt> "q" oraz "r" <dd> pozwalają gcc zadecydować do którego rejestru załadować zmienną
+    <dt> "g" <dd> oznacza że zmienna będzie albo w rejestrach, albo w pamięci
+    <dt> "A" <dd> oznacza załadowanie zmiennej typu long long (64 bity) do rejstrów
+    eax i edx. 
+    <dt> "m" <dd> oznacza miejsce w pamięci
+    <dt> "0", "1","2" <DD> oznacza że chcesz ponownie wykorzystać poprzednie  przypisanie
+    rejestrów (np drugi raz chcesz wykorzystać rejestr przypisany "q").
+    </DL>
+    <p>
+    <br> Poniższe oznaczenia znajdziesz w info na temat gcc. Napisz info gcc, najedź na
+    napis 'C Extensions', kliknij enter, najedź na napis 'Extended Asm' i tam znajdziesz
+    nieco po angielsku na temat rozszerzonego asma. Napisz info gcc ->Machine Desc ->
+    Constraints -> Machine Constraints i poszukaj 'Intel 386' tam znajdziesz opis (po angielsku)
+    tych oznaczeń. <br>
+    <br> Przypominam, że jeżeli używamy któregoś z trzech pól (zmienne wyjściowe, wejściowe, 
+    zmodyfikowane rejestry), to mamy do czynienia z assemblerem rozszerzonym, i nazwy rejestrów musimy
+    poprzedzać '%%' a nie '%', czyli piszemy %%eax a nie %eax. <br>
+    W naszym przykładzie nie używamy pola zmienne wyjściowe, więc zostawiamy je puste, nie używamy
+    pola zmodyfikowane rejestry więc je pomijamy. 
+    <br>
+    drugi.c <br><br>
+    <tt>
+    #include &lt;stdio.h&gt;
+    <br><br>
+    <em> void</em> main()<br>
+    {<br>
+    <em>int </em> a=0;<br>
+    <i>printf</i>("Wartość a: %d przed wykonaniem \n",a);<br>
+    <em>asm </em>(<br><dl><dd>
+        "<A HREF="dodg.php#mov"> movw </a> $1,%0"<br>
+        :<br>
+        : <A HREF="#rej"> "r" (a) </a><br></dl>
+        );<br>
+    <i>printf</i>("I wartość tej samej zmiennej po wykonaniu %d\n",a);<br>
+    }<br></tt>
+    <br>
+    Efektem wykonania będzie napis :
+    <br> <kbd><pre>
+    Wartość a: 0 przed wykonaniem
+    I wartość tej samej zmiennej po wykonaniu 0</pre><br>
+    </kbd>
+    Dlaczego ? Zmienna 'a' jest traktowana jako 'wejściowa', tzn z poziomu 
+    inline-assemblera można się do niej odwoływać, ale nie można jej zmieniać. 
+    Jeżeli zależy nam na tym, by zobaczyć efekt,  napiszemy kolejny program, z wykorzystaniem
+    wartości "wyjściowych"
+    <br>
+    
+     <A NAME="p3"><CENTER><H3> Przykład trzeci </H3></CENTER></A>
+    
+    <P> <A NAME="output"> <DD>
+    
+    Jeżeli </A> chcemy z poziomu assemblera zmieniać zawartość zmiennych, musimy zadeklarować
+    te zmienne w polu "Zmienne wyjściowe". Robimy to tak :
+    <br> <tt> asm("..." :"=q" (a) ); </tt> <br> Jak widać wszystko podobnie jak
+    poprzednio , z tym że używamy znaku = zawsze przed określaniem gdzie ma być załadowana
+    zmienna. Odwołujmey się znowu za pomocą %0, %1 itd. Zawsze pamiętamy, że %0 odnosi się
+    do pierwszej zadeklarowanej w ten sposób zmiennej niezależnie od tego w którym polu się
+    znalazła. <A HREF="#rej"> Format </A>jest identyczny jak dla zmiennych <A HREF=#output"> wejściowych .</a><br>
+    <br>
+    
+    trzeci.c<br>
+    <br><tt>
+    #include &lt;stdio.h&gt;<br>
+    
+    <em>void </em>main()<br>
+    {<br>
+    <em>int</em> a=0;<br>
+    <em>int</em> b=0;<br>
+    <i>printf</i>("Wartość a: %d  b: %d przed wykonaniem \n",a,b);<br>
+    <em>asm </em>(<br><dl><dd>
+        " <A HREF="dodg.php#mov"> movw </A>$1,%0\n"<br>
+        " <A HREF="dodg.php#mov"> movw </A>%0,%1\n"<br>
+        : "=r" (b)<br> 
+        :  <A HREF="#rej">"r" (a)</a><br></dl>
+        );<br>
+    <i>printf</i>("I wartość tych samych zmiennych po wykonaniu a: %d b: %d\n",a,b);<br>
+    }
+    </tt><br><br>
+    
+    Tym razem otrzymamy następujący wynik: <br>
+    <kbd><pre>
+    Wartość a: 0  b: 0 przed wykonaniem
+    I wartość tych samych zmiennych po wykonaniu a: 0 b: 1
+    </pre></kbd>
+    
+    <p>
+    Co się stało ? Zmienna 'a' została zadeklarowana jako wejściowa. Ponieważ 
+    jest druga na liście więc odwołujemy się do niej przez %1. Zmienna 'b' jest jako wyjściowa
+    więc efekty jej zmian będzie widać na zewnątrz instrukcji assemblerowej. Odwołujemy się
+    do niej za pomocą %0, bo została zadeklarowana na pierwszym miejscu. 
+    <br> Załadowaliśmy liczbę '1' do zmiennej a (zmiany tej na zewnątrz nie widać,
+    bo a jest tylko wejściowa) a potem zmiennej 'b' przypisaliśmy tymczasową wartość
+    'a'. Kazaliśmy zarówno 'a' jak i 'b' przechować w rejestrach, ale nie obchodzi nas w jakich.
+    Jeżeli nas interesuje gdzie dokładnie, to wykonajmy instrukcję <tt> gcc -S trzeci.c </tt>
+    i obejrzyjmy plik trzeci.s , między #APP a #NOAPP będzie nasz wstawiony inline
+    assembler.
+    
+    
+    Slowko wyjasnienia: jest mozliwe oczywiscie, by zamiast tego napisac:
+    
+    <br><tt>
+    #include &lt;stdio.h&gt;<br>
+    
+    <em>void </em>main()<br>
+    {<br>
+    <em>int</em> a=0;<br>
+    <em>int</em> b=0;<br>
+    <i>printf</i>("Wartość a: %d  b: %d przed wykonaniem \n",a,b);<br>
+    <em>asm </em>(<br><dl><dd>
+        " <A HREF="dodg.php#mov"> movw </A>$1,%0\n"<br>
+        " <A HREF="dodg.php#mov"> movw </A>$1,%1\n"<br>
+        : "=r" (b)<br> 
+        :  <A HREF="#rej">"r" (a)</a><br></dl>
+        );<br>
+    <i>printf</i>("I wartość tych samych zmiennych po wykonaniu a: %d b: %d\n",a,b);<br>
+    }
+    </tt><br><br>
+    
+    Nie robie tego dlatego, zeby po pierwsze, dokonac dokladnego przekladu a=b=1, a po drugie, zeby zademonstrowac, ze i tak mozna :). Ma to wplyw jednakze na szybkosc, o czym nizej.
+    <A NAME="p4"><CENTER><H3> Przykład czwarty </H3></CENTER></A>
+    
+    <br> To samo co poprzednio, tyle tylko że a zadeklarujemy jako zmienną wejściową.
+    Wydawałoby się, że powinniśmy wyniki identyczne, prawda? Mi też na początku tak 
+    się zdawało i dziesiątki razy popełniałem ten sam bład, przed którym teraz was 
+    przestrzegę. <br>
+    
+    czwarty.c <br>
+    <br><tt>
+    #include &lt;stdio.h&gt;<br>
+    <br>
+    
+    <em>void </em>main()<br>
+    {<br>
+    <em>int</em> a=0;<br>
+    <em>int</em> b=0;<br>
+    <i>printf</i>("Wartość a: %d  b: %d przed wykonaniem \n",a,b);<br>
+    <em>asm </em>(<br><dl><dd>
+        " <A HREF="dodg.php#mov"> movw </A>$1,%0\n"<br>
+        " <A HREF="dodg.php#mov"> movw </A>%0,%1\n"<br>
+        :  <A HREF="#output"> "=r" (b), "=r" (a) </a><br>
+        :<br></dl>
+        );<br>
+    printf("I wartość tych samych zmiennych po wykonaniu a: %d b: %d\n",a,b);<br>
+    }<br>
+    </tt><br>
+    <p>
+    
+    i efekt :
+    <kbd><pre>
+    Wartość a: 0  b: 0 przed wykonaniem
+    I wartość tych samych zmiennych po wykonaniu a: 134479873 b: 1
+    </pre></kbd>
+    
+    Dziwny nie ? Dlaczego tak się stało? To bardzo proste. Zmienna b została załadowana
+    do któregoś z rejestrów 32 bitowych. My, instrukcją movw $1,%0 (która rozwinęła
+    się do np movw $1,%eax) wprowadziliśmy tam 16 bitową liczbę. Czyli, jak łatwo się domyśleć,
+    zawartość ax będzie równa 1, a pozostała część eax będzie miało wartość nieokreśloną. 
+    Można ten błąd naprawić na dwa sposoby:<br>
+    pierwszy :
+    
+    <A NAME="p5">piaty.c<br><br><tt><br></A>
+    #include &lt;stdio.h&gt;<br>
+    <br>
+    <em>void </em>main()<br>
+    {<br>
+    <em> int </em>a=0;<br>
+    <em> int </em>b=0;<br>
+    <i>printf</i>("Wartość a: %d  b: %d przed wykonaniem \n",a,b);<br>
+    <em>asm </em>(<br><dl><dd>
+        "<A HREF="dodp.php#xor"> xor </A>%1,%1\n"<br>
+        "<A HREF="dodg.php#mov">movw </A>$1,%0\n"<br>
+        "<A HREF="dodg.php#mov"> movw </A>%0,%1\n"<br>
+        : <A HREF="#output"> "=r" (b), "=r" (a)</a><br>
+        :<br></dl>
+        );<br>
+    <i>printf</i>("I wartość tych samych zmiennych po wykonaniu a: %d b: %d\n",a,b);<br>
+    }<br>
+    </tt><br><br>
+    i drugi<br>
+    <A NAME="p6">szosty.c</A>
+    <br><br><tt>
+    #include &lt;stdio.h&gt;
+    <br><br>
+    <em>void</em> main()<br>
+    {<br>
+    <em>int </em> a=0;<br>
+    <em>int </em>b=0;<br>
+    <i>printf</i>("Wartość a: %d  b: %d przed wykonaniem \n",a,b);<br>
+    <em>asm </em>(<br><dl><dd>
+        " <A HREF="dodg.php#mov"> movl </A>$1,%0\n"<br>
+        " <A HREF="dodg.php#mov"> movl </A>%0,%1\n"<br>
+        : <A HREF="#output"> "=r" (b), "=r" (a)</a><br></dl>
+        );<br>
+    <i>printf</i>("I wartość tych samych zmiennych po wykonaniu a: %d b: %d\n",a,b);<br>
+    }<br></tt><br>
+    <kbd><pre>
+    Wartość a: 0  b: 0 przed wykonaniem
+    I wartość tych samych zmiennych po wykonaniu a: 1 b: 1
+    </pre></kbd>
+    
+    <p> W sposobie pierwszym 
+    po prostu wyczyściliśmy rejestr, który akurat przechowywał
+    zmienną 'a', w związku z czym rejestr ten  
+    nie zawierał żadnych przypadkowych wartości, w sposobie drugim
+    (lepszym) powiedzieliśmy gcc, że ma traktować argumenty jako liczby 32-bitowe
+    (movl zamiast movw).
+    <br>
+    
+    Przy okazji : skompiluj ten sam plik szosty.c nastepująco :<br>
+    <tt>gcc szosty.c -o a.out</tt><br>
+    A potem :<br><tt>
+    gcc -O2 szosty.c -o a1.out</tt><br>
+    i porównaj pliki wynikowe komendą ls -al a.out . <br>
+    Widać małą różnicę rozmiaru, nieprawdaż? Warto więc znać opcje kompilatora.
+    <BR> <DD>
+    I jeszcze przy okazji : <br>
+    <tt><br>
+    <A NAME="p7">siodmy.c</A>
+    #include &lt;stdio.h&gt;
+    <br><br>
+    <em>void</em> main()<br>
+    {<br>
+    <em>int </em>a=0;<br>
+    <em>int </em>b=0;<br>
+    <i>printf</i>("Wartość a: %d  b: %d przed wykonaniem \n",a,b);<br>
+    a=b=1;<br>
+    <i>printf</i>("I wartość tych samych zmiennych po wykonaniu a: %d b: %d\n",a,b);<br>
+    }<br><br></tt>
+    
+    <p> Zazwyczaj ten kod będzie albo takiego samego rozmiaru jako poprzedni, albo nawet mniejszy. Dlaczego? Gdyz w naszym przykladzie pojawia sie zaleznosc miedzy dwoma rejestrami (wyjasnienie juz wkrotce w rozdziale o optymalizacji), podczas gdy kompilator automatycznie generuje kod ktory zaleznosci tej unika. 
+    Pytanie więc znowu po co używać assemblera? Spokojnie. Ten przyklad pokazuje, ze programiki pisane na chybcika i bez zastanowienia moga byc gorsze od C.
+    Chyba nie zdziwiony? :-) Naprawdę zastanów się nim zaczniesz pisać coś w assemblerze, 
+    i zawsze próbuj napisać równoważny kod w C. Potem porównaj szybkość działania,
+    wielkość pliku i dopiero wtedy wybierz lepszą wersję. A najlepiej obejrzyj kod wypluty przez gcc i popraw go by uzyskac lepszy wynik.<br>
+    
+    <A NAME="p8"><CENTER> <H3> Przykład ósmy </H3> </CENTER></A>
+    
+    <p> Teraz napiszemy sobie mały programik, który posłuży nam do pokazania jednego 
+    błędu i paru innych rzeczy. Programik będzie wpisywał 
+    elementy jednej tablicy w odwrotnej kolejności do drugiej, tzn. przed jego 
+    wykonaniem będziemy mieli tablicę 
+    a={11,12} a po wykonaniu tablicę c={12,11}. <BR>
+    Kilka słów na temat użytych instrukcji. Instrukcja <tt><A HREF="dodg.php#lea">leal</A></tt> oblicza 
+    adres pierwszego argumentu i umieszcza go w drugim. Np <tt> leal a,%%eax </tt> znaczy to 
+    samo mniej więcej co <tt>  <A HREF="dodg.php#mov"> movl </A>$a,%%eax. </tt>.Instrukcja <tt> 
+    <A HREF="dodg.php#mull"> mull </A> </tt> mnoży swój 
+    argument przez zawartość rejstru %%eax i wynik zwraca w parze rejestrów
+    %%eax:%%edx (%%eax młodszy bajt, %%edx starszy bajt). Instrukcja <tt> <A HREF="dodg.php#loop">loop </a></tt>
+    powoduje skok do <A HREF="doda.php#etykiety"> etykiety </A> podanej jako argument, jeżeli %%ecx jest różne od zera,
+    i zmniejsza %%ecx o 1. Instrukcja <tt><A HREF="dodp.php#sub"> subl</a> </tt> powoduje odjęcie od pierwszego
+    argumentu durgiego i umieszcza wynik w drugim argumencie. Instrukcja <tt> <A HREF="dodp.php#push">push</a> </tt>
+    umieszcza argument na stosie, a <tt><A HREF="dodp.php#pop"> pop </a> </tt> zdejmuje go stamtąd. 
+    Wreszcie instrukcja <tt><A HREF="doda.php#dec"> dec</a> </tt> podowuje zmniejszenie argumentu o jeden.
+    Dokładniejszego opisu tych instrukcji poszukaj na końcu tego tekstu . <br>
+    
+    osmy.c (wersja z błędem)
+    <br><tt>
+    #include &lt;stdio.h&gt;<br>
+    <br>
+    <em> void </em> main()<br>
+    {<br>
+    <em>int </em>a[2]={11,12};<br>
+    <em> int </em> c[2];<br>
+    <i>printf</i>("Przed wykonaniem instrukcji a[0]=%d, a[1]=%d",a[0],a[1]);<br>        
+    <em>asm volatile</em>( <br><dl> <dd>
+    "<A HREF="dodg.php#lea">leal </A>%0,%%edx\n\t"<br>
+    "<A HREF="dodg.php#lea">leal </A>%1,%%ebx\n\t"<br>
+    " <A HREF="dodg.php#mov"> movl </A>$1,%%eax\n\t"<br>
+    " <A HREF="dodg.php#mov"> movl </A>$2,%%ecx\n\t"<br>
+    "<A HREF="doda.php#etykiety"> petla1:</A>n\t"<br>
+    " <A HREF="dodp.php#push">pushl </A>%%eax\n\t"<br>
+    "<A HREF="dodp.php#push">pushl </A>%%ecx\n\t"<br>
+    " <A HREF="dodg.php#mov"> movl </A>$2,%%ecx\n\t"<br>
+    " <A HREF="dodg.php#mov"> mull </A>%%ecx\n\t"<br>
+    " <A HREF="dodg.php#mov"> movl </A>(%%edx,%%eax,2),%%ecx\n\t"<br>
+    "<A HREF="dodp.php#push">pushl </A>%%ebx\n\t"<br>
+    " <A HREF="dodg.php#mov"> movl </A>$2,%%ebx\n\t"<br>
+    "<A HREF="dodp.php#sub"> subl </A>%%eax,%%ebx\n\t"<br>
+    " <A HREF="dodg.php#mov"> movl </A>%%ebx,%%eax\n\t"<br>
+    " <A HREF="dodp.php#pop">popl </A>%%ebx\n\t"<br>
+    " <A HREF="dodg.php#mov"> movl </A>%%ecx,(%%ebx,%%eax,2)\n\t"<br>
+    "<A HREF="dodp.php#pop">popl </A>%%ecx\n\t"<br>
+    "<A HREF="dodp.php#pop">popl </A>%%eax\n\t"<br>
+    "<A HREF="doda.php#dec">decl </A>%%eax\n\t"<br>
+    "<A HREF="dodg.php#loop"> loop </A>petla1\n\t"<br>
+    :<A HREF="#output"> "=g" (a) , "=g" (c)</a><br>
+    :: <A HREF="#modyf">"ax", "cx", "dx" , "memory"</a></dl><br>
+    );<br>
+    <i>printf</i>("Po wykonaniu instrukcji c[0]=%d, c[1]=%d\n",c[0],c[1]);<br>
+    }<br>
+    </tt><br><br>
+    <p>
+    
+    Niestety, ten program ma błąd. Spróbuj znaleźć go sam. 
+    Jeżeli uda Ci się go znaleźć, to już
+    umiesz w miarę dobrze assemblera, a przynajmniej jesteś na dobrej drodze do 
+    nauczenia się go.<br> 
+    <br>
+    
+    Jeżeli nie wiesz gdzie jest błąd, doczytaj najpierw ten paragraf do końca. Po kolei
+    wyjaśnię co robią które komendy. <br><p>
+    Najpierw obliczamy adres początku tablicy a ( która jest podana jako pierwszy
+    argument, stąd %0, i gcc ma samo zadecydować gdzie ten argument ma być, stąd "=g")
+    i adres ten ładujemy do rejestru %%edx. Tak samo obliczamy adres tablicy c, w której
+    maja się znaleźć odwrócone elementy tablicy a. Adres tej drugiej tablicy, która
+    została podana jako drugi argument (stąd %1) zostaje złożona do rejestru %ebx. Ponieważ
+    używam rozszerzonego assemblera, nazwy wszsytkich rejestrów poprzedzam dodatkowym '%'.
+    Ładuję jedynkę do %eax i dwójkę do %ecx. Ta dwójka to liczba pętli które wykona
+    program. Kolejna instrukcja to etykieta o nazwie 'petla1'. Stare wartości %eax i %ecx
+    odkładam na stos. Do %ecx ładuję dwójkę, i mnożę %eax przez %ecx. Wynik ma być w rejestrze
+    %eax:%edx (już widzisz, gdzie jest błąd, prawda?). 
+    
+    <P> Teraz przykład odwoływania się
+    do adresów zmienej. Gdybym chciał się odwołać do pierwszego elementu tablicy 'a', 
+    napisałbym (%%edx) (bo do tego właśnie rejstru wcześniej załadowałem adres komendą
+    leal %0,%%edx). Gdybym chciał odwoływać się do elementu drugiego tablicy, napisałbym
+    4(%%edx). Dlaczego? Dokonaj translacji osmy.c komenda gcc -S osmy.c na plik w 
+    asmie osmy.c i obejrzyj sobie go. Widzisz? Pierwszy element to -8(%%ebp), drugi
+    to -4(%%ebp). Skoro %edx wskazuje na pierwszy element, wieć żeby dostać się do 
+    drugiego, muszę do niego dodać cztery bajty. Stąd to 4(%%edx). Dlaczego akurat cztery?
+    Ponieważ typ int ma właśnie długość czterech bajtów. Gdyby to była tablica typu
+    char, to dodałbym 1, czyli jeden bajt, bo długość typu char to jeden bajt. Proste 
+    prawda? (%%edx,%%eax,4) oznacza natomiast: element o adresie %edx+ %eax*4. Zamiast
+    czwórki mógłbym wpisać jakąś inną potęgę dwójki, np: 1,2,4,8. W moim przypadku 
+    %eax zawiera w pierwszej pętli 2, a w drugiej zero, więc najpierw odwołam się do 
+    %edx+2*2 czyli tak samo jak 4(%edx), czyli drugiego elementu tablicy, a potem do
+    %edx+0*2, czyli do pierwszego elementu tablicy. Reszty chyba już nie muszę tłumaczyć?
+    
+    <p>Teraz wyjaśnienie gdzie był błąd : sam się zresztą już chyba domyśliłeś. W rejestrze %edx
+    miałem przechowywać adres tablicy a, ale komenda mul, gdy jej argument jest 32-bitowy, umieszcza
+    wynik w parze rejestrów %eax:%edx. W naszym przypadku do %edx powędrowało zero, więc
+    więc zamiast odczytywać elementy z tablicy 'a', czytałem je gdzieś z kosmosu. 
+    Jak go poprawić? Bardzo prosto. Dopisz przed komendą "mull %%ecx\n\t" komendą
+    "pushl %%edx\n\t" a bezpośrednio po niej komendę "popl %%edx\n\t".<br>
+    <BR> <DD>Ten przykład, zauważ, był potwornie rozbudowany, po to by pokazać Ci działanie kilku komend
+    i paru mechanizmów. A oto podobny program, który odrwaca elementy jednej tablicy :
+    <P>
+    <br><tt>
+    #include <stdio.h><br>
+    <br>
+    void main()<br>
+    {<br>
+    int a[2]={11,12};<br>
+    // gdybym chciał dwie tablice, tu zadeklarowałbym int b[2]={0,0};<br>
+    printf("Przed wykonaniem instrukcji a[0]=%d, a[1]=%d\n",a[0],a[1]);<br>
+    asm volatile(<br><dl><dd>
+    "<A HREF="dodg.php#lea">lea </A>%0,%%edx\n\t"<br>
+    // tutaj dodałbym leal %1,%%ebx<br>
+    "<A HREF="dodp.php#push">pushl </A>(%%edx)\n\t"<br>
+    "<A HREF="dodp.php#push">pushl </A>4(%%edx)\n\t"<br>
+    //i wtedy dwie następne linijki zamieniłbym %%edx na %%ebx <br>
+    "<A HREF="dodp.hmtl#pop">popl </A>(%%edx)\n\t"<br>
+    "<A HREF="dodp.php#pop">popl </A>4(%%edx)\n\t"<br>
+    :<A HREF="#output"> "=g" (a) </A>// tu dodałbym "=g" (b) <br>
+    ::<A HREF="#modyf">"dx" </a>// a tu dodałby, "bx"<br></dl> 
+    );<br>
+    printf("Po wykonaniu instrukcji a[0]=%d, a[1]=%d\n",a[0],a[1]);<br>
+    }<br>
+    </tt><br>
+    
+    <P> <A NAME="modyf">
+    Aha, </A> zapomniałem jeszcze wspomnieć po co jest lista zmodyfikowanych rejestrów.
+    W liście tej informujemy gcc, że dany rejestr jest używany przez nas, i kompilator
+    nie powinien już zakładać, że znajdujące się tam dane są takie, jak przed
+    wykonaniem instrukcji asm. Jeżeli sami zachowujemy wartość odpoweidnich 
+    rejestrów, to wtedy ostatnie pola możemy pominąć. W ostatnim przykładzie modyfikowałem
+    rejestr %edx, więc poinformowałem kompilator o tym.
+    <BR><HR><BR>
+    <!--?php
+    include ("http://www.cs.put.poznan.pl/adanilecki/inline_asm/navigator_down.php?name=$PHP_SELF");
+    ?-->
+    </BODY>
+    </HTML>
+    
