@@ -1,0 +1,29 @@
+1.
+Przeanalizowałem, i postarałem się zrozumieć :)
+Nie wiem co napisać.
+Strasznie długie assemblery wychodzą z CPP w porównaniu do C.
+
+2.
+Linie 14 i 15 są odwzorowaniem mojego geniuszu programistycznego w tym zadaniu
+tak naprawdę.
+Bo mamy stworzenie etykiety i jump do niej (ergo while true)
+Poniżej omawiane linie żeby nie musiał Pan szukać.
+.L2:
+	jmp	.L2
+
+3.
+W linii 34 mamy wywołanie funkcji:
+`call	foo`
+
+4.
+Funkcje jak i ich kody wpisane w plikach od 4.1 do 4.8.
+Dziękuję za podesłanie tej strony.
+Nauczyłem się dzięki temu doinstalowywania bibliotek 32-bitowych :D
+
+5.
+Argumenty do funkcji można przekazać w różne sposoby, które są
+zależne od języka w jakim piszemy.
+W C można to zrobić zarówno przez wskaźnik jak i wartość, natomiast są
+też języki (przykładowo JS) które przekazują tylko przez wartość.
+Prawdopodobnie są też inne kąbinacje, ale te 2 języki znam
+na tyle że mogę się bezpiecznie na ten temat wypowiadać.
