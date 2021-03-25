@@ -1,0 +1,52 @@
+Co do starszych programów to sprawdziłem 2 zadania z zajęć 1.
+Nie sprawdzam zadania z cpp, bo przepisałem to z C jako że c zawiera się w cpp.
+Taaakżeee....
+
+Logi z zadania z C:
+    ==35769== Memcheck, a memory error detector
+    ==35769== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+    ==35769== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+    ==35769== Command: ./a.out zyrafa
+    ==35769== 
+    5
+    9
+    ==35769== 
+    ==35769== HEAP SUMMARY:
+    ==35769==     in use at exit: 0 bytes in 0 blocks
+    ==35769==   total heap usage: 15 allocs, 15 frees, 10,133 bytes allocated
+    ==35769== 
+    ==35769== All heap blocks were freed -- no leaks are possible
+    ==35769== 
+    ==35769== For lists of detected and suppressed errors, rerun with: -s
+    ==35769== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Logi z zadania z węży:
+    ==20347== Memcheck, a memory error detector
+    ==20347== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+    ==20347== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+    ==20347== Command: ./main.py
+    ==20347== 
+    ./main.py: 1: ./main.py: Syntax error: "(" unexpected
+    ==20347== 
+    ==20347== HEAP SUMMARY:
+    ==20347==     in use at exit: 2,249 bytes in 70 blocks
+    ==20347==   total heap usage: 72 allocs, 2 frees, 3,273 bytes allocated
+    ==20347== 
+    ==20347== LEAK SUMMARY:
+    ==20347==    definitely lost: 0 bytes in 0 blocks
+    ==20347==    indirectly lost: 0 bytes in 0 blocks
+    ==20347==      possibly lost: 0 bytes in 0 blocks
+    ==20347==    still reachable: 2,249 bytes in 70 blocks
+    ==20347==         suppressed: 0 bytes in 0 blocks
+    ==20347== Reachable blocks (those to which a pointer was found) are not shown.
+    ==20347== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+    ==20347== 
+    ==20347== For counts of detected and suppressed errors, rerun with: -v
+    ==20347== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Wnioski:
+W C bez zaskoczeń, ale miło zobaczyć że to co napisałem ma ręce i nogi.
+W wężach podejrzewam że musiałbym skonfigrować jakoś valgrinda o ile
+może on w ogóle działać z wężami.
+Jeśli tylko mógłbym to chciałbym wrócić do mojego C i nie tańczyć więcej z wężami.
+To nie były zbyt dobre wnioski, ale przynajmniej były moje :)
