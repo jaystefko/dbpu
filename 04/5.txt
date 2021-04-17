@@ -1,0 +1,28 @@
+Wyniki:
+
+1. 3.1.cpp:
+Score after two iterations: 10000000 (tu jest inny wynik niż bez valgrinda patrzącego... O.o może to są błędy shroedinger'a?)
+Duration time: 429 seconds
+==55742== 
+==55742== Use --history-level=approx or =none to gain increased speed, at
+==55742== the cost of reduced accuracy of conflicting-access information
+==55742== For lists of detected and suppressed errors, rerun with: -s
+==55742== ERROR SUMMARY: 10000000 errors from 11 contexts (suppressed: 4471773 from 74)
+
+2. 3.2.cpp:
+Score after two iterations: 10000000
+Duration time: 302 seconds
+==56286== 
+==56286== Use --history-level=approx or =none to gain increased speed, at
+==56286== the cost of reduced accuracy of conflicting-access information
+==56286== For lists of detected and suppressed errors, rerun with: -s
+==56286== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
+
+3. 4.cpp:
+Score after two iterations: 10000000
+Duration time: 295 seconds
+==56801== 
+==56801== Use --history-level=approx or =none to gain increased speed, at
+==56801== the cost of reduced accuracy of conflicting-access information
+==56801== For lists of detected and suppressed errors, rerun with: -s
+==56801== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

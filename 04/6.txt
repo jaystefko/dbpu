@@ -1,0 +1,5 @@
+Przykłady timing attack: (rok, źródło)
+1. Meltdown - 2018, https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)
+Narażone: mikroprocesory Intel x86, procesory IBM POWER, niektóre mikroprocesory ARM
+2. Spectre - 2018, https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)
+Narażone: współczesne mikroprocesory wykonujące przewidywanie ścieżki

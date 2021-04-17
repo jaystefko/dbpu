@@ -1,0 +1,2 @@
+Wynik działań na 1 wątku: (czas trwania, wynik)
+1. wersja liniowa:  151s, 10000000 (wolniej niż z blokadami a wynik też poprawny)

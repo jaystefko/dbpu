@@ -1,0 +1,2 @@
+W tym momencie porównywany jest # hasła wpisanego z # hasłą zapisanego w bazie.
+Różnica czasowa to około 0.1 sekundy co jest znaczną poprawą z czasu sekundowego z wcześniej.

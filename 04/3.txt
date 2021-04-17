@@ -1,0 +1,3 @@
+Wyniki działań wielowątkowych: (czas trwania, wynik)
+1. wersja bez blokad:   150s, 9997169 (niepoprawny)
+2. wersja z blokadami:  145s, 10000000 (poprawny - i szybszy!!!)

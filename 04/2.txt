@@ -1,0 +1,4 @@
+Jeśli ustalimy jakiś stały czas w którym jesteśmy pewni że będziemy mieli #, to
+wysyłanie zapytania bo określonym, stałym czasie powinno załatwić problem.
+Naprzykład do tego mogą służyć te loader'y żeby pokazać użytkownikowi że coś się dzieje,
+a tak naprawdę czekamy tylko żeby napewno zawsze dostać #.
