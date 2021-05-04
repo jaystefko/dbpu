@@ -1,0 +1,41 @@
+1. Możliwości
+SELinux
+    Czyste oddzielenie polityki od egzekwowania
+    Dobrze zdefiniowane interfejsy polityk
+    Obsługa aplikacji wyszukujących zasady i wymuszających kontrolę dostępu
+    Niezależny od konkretnych zasad i języków polityki
+    Niezależny od określonych formatów i treści etykiet bezpieczeństwa
+    Indywidualne etykiety i kontrolki dla obiektów i usług jądra
+    Buforowanie decyzji dotyczących dostępu w celu zwiększenia wydajności
+    Wsparcie dla zmian zasad
+    Oddzielne środki ochrony integralności systemu (typu domeny) i poufności danych (bezpieczeństwo wielopoziomowe)
+    Bardzo elastyczna polityka
+    Kontroluje inicjalizację procesu i dziedziczenie oraz wykonanie programu
+    Kontroluje systemy plików, katalogi, pliki i otwarte deskryptory plików
+    Kontroluje gniazda, wiadomości i interfejsy sieciowe
+
+AppArmor
+    Pełna integracja.
+    Łatwe wdrożenie.
+    AppArmor zawiera pełny zestaw narzędzi konsolowych i narzędzi opartych na YaST, które pomagają w opracowywaniu, wdrażaniu i utrzymywaniu zasad bezpieczeństwa aplikacji.
+    Chroni system operacyjny, aplikacje niestandardowe i zewnętrzne przed zagrożeniami zewnętrznymi i wewnętrznymi, wymuszając odpowiednie zachowanie aplikacji.
+    Raportowanie i alarmowanie. 
+    Wbudowane funkcje pozwalają zaplanować szczegółowe raporty o zdarzeniach i skonfigurować alerty na podstawie zdarzeń zdefiniowanych przez użytkownika. 
+    AppArmor pozwala zdefiniować zasady bezpieczeństwa dla poszczególnych skryptów Perla i PHP dla zapewnienia większego bezpieczeństwa serwera WWW.
+
+Grsecurity
+    Inteligentny i solidny system kontroli dostępu oparty na rolach (RBAC), który może generować polityki najmniejszych uprawnień dla całego systemu bez konfiguracji
+    Zapobieganie wykonywaniu dowolnego kodu, niezależnie od zastosowanej techniki (niszczenie stosu, uszkodzenie stosu itp.)
+    Zapobieganie wykonywaniu dowolnego kodu w jądrze
+    Randomizacja podstaw stosu, biblioteki i sterty
+    Randomizacja podstawy stosu jądra
+    Ochrona przed możliwymi do wykorzystania błędami dereferencji wskaźnika zerowego w jądrze
+    Zmniejszenie ryzyka wycieku poufnych informacji przez błędy w jądrze z możliwością odczytu
+    Ograniczenie, które pozwala użytkownikowi przeglądać tylko jego procesy
+    Alerty bezpieczeństwa i audyty zawierające adres IP osoby, która spowodowała alarm
+
+2.Wydajność
+Grsecurity > AppArmor > SELinux
+
+3. Łatwość konfiugracji
+AppArmor > Grsecurity > SELinux

@@ -1,0 +1,12 @@
+# Last Modified: Sun Apr 18 00:44:01 2021
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/wc {
+  include <abstractions/base>
+
+  /opt/eset/esets/lib/lib*so* mr,
+  /usr/bin/wc mr,
+
+}

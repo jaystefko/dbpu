@@ -1,0 +1,25 @@
+Plik z profilem dla programu wc nazywa się "usr.bin.wc"
+
+Jak zrobiłem ten plik:
+1. sudo aa-genprof wc
+2. sudo mv usr.bin.wc ~/Projects/DBPU/05
+3. sudo chmod 777 usr.bin.wc (tak, wiem, jestem potworem, przepraszam)
+
+Co jest w pliku:
+# Last Modified: Sun Apr 18 00:44:01 2021   ~ komentarz, nuda
+abi <abi/3.0>,                              ~ definicja pod jaką wersją ABI reguła jest napisana
+
+include <tunables/global>                   ~ biblioteka którą chce ABI
+
+/usr/bin/wc {                               ~ ścieżka bezwzględna do programu
+  include <abstractions/base>               ~ ustawienia biblioteczne niezbędne dla większości aplikacji
+
+  /opt/eset/esets/lib/lib*so* mr,           ~ możliwość odpalenia czegoś pod tą ścieżką... jakieś biblioteki na niestandardowej wersja linuxa?
+  /usr/bin/wc mr,                           ~ możliwość uruchomienia samego programu (ścieżka do wc)
+
+}
+
+Wiedza o tym co jest czym w pliku:
+https://gitlab.com/apparmor/apparmor/-/wikis/AppArmorpolicyfeaturesabi
+https://gitlab.com/apparmor/apparmor/-/wikis/Profiling_by_hand
+https://bugs.launchpad.net/ubuntu/+source/rsyslog/+bug/1827253 -> stąd wziąłem podejrzenie, że mr znaczy możliwość rozruchu
