@@ -1,0 +1,14 @@
+Generalnie z tego co przeczytałem na kilku stronach to temat jest bardziej złożony niż podejrzewałem.
+Są firmy specjalizujące się w niszczeniu danych tak żeby nie dało się ich odzyskać a nawet
+wtedy mają one pewne pakiety niszczenia zgodnie z normami (np. Norma DIN 66399) bo za coraz to wyższe
+normy płaci się więcej.
+
+Bardzo chciałbym móc powiedzieć że przy dyskach magnetycznych wystarczy rozmagnesować dysk a potem go spalić,
+opluć i zakopać ale pewnie i tak znajdzie się jakaś kuna dla której nie będzie to problemem.
+Temat usuwania danych z dysków magnetycznych jest bardzo skomplikowany i jeśli są całe firmy specjalizujące się
+w tym to moja odpowiedź niezależnie od chęci będzie płytka i nie obejmie całości tematu.
+
+Co do dysków SSD/pendrive etc podejrzewam że możliwość rzeczywistego usunięcia czegokolwiek zbliża się do niemożliwości.
+
+Linkuję stronę z całkiem przydatnymi informacjami z której również korzystałem (ta chyba jest najbardziej treściwa):
+https://cbz.pl/niszczenie-elektronicznych-nosnikow-danych/

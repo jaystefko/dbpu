@@ -1,0 +1,1 @@
+Plik: main.c :)

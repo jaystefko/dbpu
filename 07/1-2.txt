@@ -1,0 +1,7 @@
+1. możliwość zrzutu pamięci - zaszyfrować wrażliwe dane i usunąć klucze. Starać się nie trzymać danych w pamięci i usuwać z pamięci jak już nie są potrzebne.
+2. plik wymiany/pamięć wirtualna - zaszyfrować wrażliwe dane i usunąć klucze.
+3. hibernacja systemu - zaszyfrować wrażliwe dane i usunąć klucze.
+4. możliwość odczytu zawartości RAM po restarcie systemu (czasami trzeba ją zamrozić) - zaszyfrować wrażliwe dane i usunąć klucze. Zwiększyć odświeżanie RAM-u.
+5. wykonanie programu na maszynie wirtualnej/zdalnej/w chmurze - zaszyfrować wrażliwe dane i usunąć klucze.
+6. Najłatwiejszą metodą szybkiego znalezienia kluczy kryptograficznych w dużym zrzucie pamięci znalezioną przeze mnie metodą było wykorzystanie darmowego programu findaes (https://sourceforge.net/projects/findaes/)
+7. By zabezpieczyć klucze należy usunąć je wszystkie po szyfrowaniu (najprostsza metoda).
