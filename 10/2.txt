@@ -1,0 +1,2 @@
+Udało mi się odczytać tyle samo danych co w zadaniu 1 - koemnda `cat /dev/urandom > plik.txt` (plik wynikowy miał 10.6 GB)
+Mój procesor: Intel® Core™ i7-10850H CPU @ 2.70GHz × 12 

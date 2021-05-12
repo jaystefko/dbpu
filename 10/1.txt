@@ -1,0 +1,5 @@
+Udało mi się odczytać 10,6 GB po wpisaniu koemndy `cat /dev/random > plik.txt` (plik wynikowy miał 10.6 GB)
+Domyślnie jest 4096 bitów. (komenda: `vi /proc/sys/kernel/random/poolsize`)
+według tego linku : https://elixir.bootlin.com/linux/latest/source/drivers/char/random.c#L356
+Rozmiar ten jest zapisany w kodzie w pliku `/drivers/char/random.c` poprzez
+dwie predefinicje (INPUT_POOL_WORDS i OUTPUT_POOL_WORDS) i to właśnie one ustalają wielkość.

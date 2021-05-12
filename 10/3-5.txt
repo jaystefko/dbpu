@@ -1,0 +1,20 @@
+Generator liczb losowych (ang. random number generator, RNG) – program komputerowy lub układ elektroniczny generujący stacjonarny i ergodyczny,
+losowy ciąg elementów binarnych zorganizowanych zwykle jako ciąg liczb losowych.
+Generatory liczb losowych są ważnymi współczesnymi narzędziami badawczymi, używanymi w wielu dziedzinach,
+m.in. w kryptografii lub statystyce do symulacji procesów (przybliżone obliczenia matematyczne i symulacje fizyczne przy użyciu metody Monte Carlo).
+Wynikiem działania generatora liczb losowych zwykle są liczby z przedziału [0,1] o rozkładzie jednostajnym.
+Z generatora o takim rozkładzie można uzyskać generator o dowolnym innym rozkładzie obliczając odwrotną dystrybuantę pożądanego
+rozkładu z wyników pierwszego generatora.
+// Źródło: https://pl.wikipedia.org/wiki/Generator_liczb_losowych
+
+Quantis Random Number Generator (https://www.idquantique.com/random-number-generation/products/quantis-random-number-generator/)
+Koszt urządzenia: 1036 euro + wysyłka
+Czas wygenerowania liczby 1024 bitowej: 244 μs
+Losowość: przechodzi wszystkie testy
+Brak informacji o sposobie whiteningu.
+
+TrueRNG V3 (https://www.amazon.com/TrueRNG-V3-Hardware-Random-Generator/dp/B01KR2JHTA)
+Koszt urządzenia: ~50$ + przesyłka
+Czas wygenerowania liczby 1024 bitowej: 320 μs
+Losowość: Przechodzi wszystkie standardowe testy (Dieharder, ENT, Rngtest, FIPS-140-2)
+Brak informacji o sposobie whiteningu.
