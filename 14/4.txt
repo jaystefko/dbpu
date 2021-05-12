@@ -1,0 +1,8 @@
+Secure Attention Key (SAK) - kombinacja kluczy z klawiatury wpisanych przed logowaniem systemu
+które uruchamiają specjalny typ logowania.
+Generalnie ma to zapobiegać spoofing'owi (wykradaniu haseł) bo jak wejdziemy w ten
+'trustworthy login' to kernel zabija wszystko inne.
+
+Dla Windows'a NT Ctrl + Alt + Del było właśnie SAK'iem, dlatego podejrzewam było zalecane
+
+// źródło: https://en.wikipedia.org/wiki/Secure_attention_key

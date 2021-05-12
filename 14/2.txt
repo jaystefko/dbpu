@@ -1,0 +1,38 @@
+1. Źle sformułowane następstwa
+    Załóżmy, że konwerter UTF-8 dokonuje iteracji przez bajty wejściowe UTF-8, przekształcając je w kodowanie znaków wyjściowych.
+    Jeśli konwerter napotka źle sformułowaną sekwencję UTF-8, może potraktować ją jako błąd na wiele różnych sposobów,
+    w tym zastępując znak taki jak U + FFFD, SUB, „?” Lub SPACJA. Nie może jednak zużywać żadnych poprawnych bajtów następców.
+2. Zastępowanie źle sformułowanych następstw
+    Jeśli znaki mają być zastępowane źle sformułowanymi podciągami, ważne jest, aby były one względnie bezpieczne.
+    Usunięcie (zastąpienie pustego ciągu) może być dość nieprzyjemne, ponieważ łączy znaki, które byłyby osobne (na przykład w MouseOver).
+    Zastępowanie znaków, które są poprawną składnią dla konstrukcji, takich jak nazwy plików, ma podobne problemy.
+    Na przykład „.” może być bardzo problematyczne.
+    U + FFFD jest zwykle bezproblemowy, ponieważ został zaprojektowany specjalnie do tego celu.
+    Oznacza to, że ponieważ nie ma znaczenia składniowego w językach programowania lub danych strukturalnych,
+    zwykle powoduje po prostu błąd podczas analizowania. Jeśli wyjściowy zestaw znaków nie jest Unicode, ten znak może być niedostępny.
+    Gdy U + FFFD nie jest dostępne, powszechną alternatywą jest „?”. Chociaż postać ta może występować składniowo,
+    wydaje się, że jest mniej podatna na atak niż większość innych.
+    Konwertery UTF-16, które nie obsługują poprawnie izolowanych parametrów zastępczych, podlegają temu samemu typowi ataku,
+    chociaż historycznie konwertery UTF-16 radziły sobie z nimi dobrze.
+3. Porównanie tekstu (sortowanie, wyszukiwanie, dopasowywanie)
+    Exploit UTF-8 jest specjalnym przypadkiem ogólnego problemu. Mogą pojawić się problemy z bezpieczeństwem,
+    gdy użytkownik i system (lub dwa systemy) porównują tekst inaczej. Dzieje się tak na przykład wtedy,
+    gdy tekst nie jest porównywany z oczekiwaniami użytkowników. Zobacz dyskusje w UTS nr 10: Algorytm sortowania Unicode.
+    System jest szczególnie wrażliwy, gdy dwie różne implementacje tego samego protokołu używają różnych mechanizmów do porównywania tekstu,
+    takich jak porównanie, czy dwa identyfikatory są równoważne, czy nie.
+4. Przepełnienia bufora
+    Niektórzy programiści mogą polegać na ograniczeniach, które są prawdziwe w ASCII lub Latin-1, ale zawodzą w przypadku ogólnego tekstu Unicode.
+    Mogą one powodować awarie, takie jak przepełnienie bufora, jeśli rośnie długość tekstu. W szczególności:
+    Ciągi mogą rozszerzać się w obudowie: Fluß → FLUSS → fluss. Współczynnik ekspansji może również ulec zmianie w zależności od UTF.
+    Programiści zakładają, że NFC zawsze komponuje, a zatem ma taką samą lub krótszą długość niż oryginalne źródło.
+    Jednak niektóre postacie rozkładają się w NFC. Współczynnik ekspansji może również ulec zmianie w zależności od UTF.
+5. Stabilność własności i postaci
+    Zasady stabilności konsorcjum Unicode [Stabilność] ograniczają możliwości zmiany standardów opracowanych przez konsorcjum Unicode.
+    Zasady te mają zapewnić, że tekst zakodowany w jednej wersji standardu Unicode pozostanie ważny i niezmieniony w późniejszych wersjach.
+    W wielu przypadkach ograniczenia nałożone przez te zasady stabilności pozwalają implementatorom uprościć obsługę określonych funkcji Unicode,
+    zapewniając, że ich implementacje nie zostaną unieważnione przez późniejszą aktualizację Unicode.
+    Wdrożenia nie powinny przyjmować założeń wykraczających poza to, co jest udokumentowane w politykach stabilności.
+    Na przykład niektóre implementacje zakładały, że do Unicode nie zostaną dodane żadne nowe znaki rozkładalne.
+    Rzeczywiste ograniczenie jest nieco luźniejsze: znaki rozkładalne nie zostaną dodane, jeśli ich rozkład był już w Unicode.
+    Można zatem dodać znak rozkładalny, jeśli jeden ze znaków w jego rozkładzie jest nowy w tej wersji Unicode.
+    Na przykład rozkładające się znaki balijskie zostały dodane do standardu w wersji 5.0, co spowodowało uszkodzenie niektórych implementacji.

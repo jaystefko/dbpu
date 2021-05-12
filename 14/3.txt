@@ -1,0 +1,7 @@
+Nie powinniśmy dawać większych praw skryptom ogólnie, ponieważ wystawia nas to na ataki
+związane z przepełnieniem bufora których skutkiem jest możliwość odpalenia dowolnego kodu z prawami procesu
+atakowanego przez napastnika. (roota co może zmienić wszystko na komputerze, również dane innych użytkowników)
+
+Źródła:
+https://attack.mitre.org/techniques/T1548/001/
+http://repository.root-me.org/Administration/Unix/EN%20-%20Dangers%20of%20SUID%20Shell%20Scripts.pdf

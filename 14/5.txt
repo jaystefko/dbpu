@@ -1,0 +1,4 @@
+1. Session hijacking i wysyłanie tylko w 1 stronę informacji dodatkowych nie zaburzając komunikacji
+2. BackDoor zostawiony w programie przez twórcę przez który można modyfikować aplikację np dla konkretnych IP w danym czasie czy robić z aplikacją co się żywnie podoba
+3. Szyfrowanie informacji w obrazach wysyłanych (np zmiana ostatniego bitu)
+4. Zmiana ostatniego bitu w dźwięku (słabsze, łatwiej zauważyć dużo - Karol Górzyński ma pracę magisterską na ten temat i nie mogę się doczekjać rezultatów :))

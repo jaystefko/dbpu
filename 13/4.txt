@@ -1,0 +1,16 @@
+1. https://onlinedisassembler.com/static/home/index.html
+    Możliwości: rzucanie 500'tkami z serwera (chlip...)
+    Ale za to te 500tki dostajemy za darmo :D
+    Open source: nie
+2. IDA-Pro
+    Podobno najlepsze, ale płatne, nie open source
+3. CFF Explorer
+    Free trial, płatne generalnie, nie open source
+4. API Monitor
+    Darmowe, nie open source
+5. WinHex
+    Płatny, nie open source
+
+Co do możliwości i innych to dane oprócz tego 1wszego wziałem z tej strony:
+https://www.apriorit.com/dev-blog/366-software-reverse-engineering-tools
+
