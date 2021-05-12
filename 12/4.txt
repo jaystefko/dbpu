@@ -1,0 +1,6 @@
+To co do zmian:
+1. Zmieniłem na C bo lubię bardziej (nie ma znaczenia)
+2. predefinicja zamiast const na MAX (bez zmiany)
+3. Nie wczytywałem się specjalnie w te if'y - mam nadzieję że +/- zrozumiałem co ma się stać
+    dodałem nie wychodzenie za planszę którego nie było :)
+4. Zmieniłem sposób wczytywania danych by można było grać w grę spokojnie :)

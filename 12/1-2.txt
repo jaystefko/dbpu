@@ -1,0 +1,10 @@
+Podam może kilka przykładów które mi przychodzą jako pierwsze do głowy:
+1. Sygnalizacja świetlna bez żadnego zabezpieczenia jakbyśmy się chcieli podłączyć (USA, kilka lat temu)
+2. Tesle których zabezpieczenia można łatwo złamać albo ich nie ma (tak samo)
+3. Hotspot'y w iOS 6 które były łamane najprostszym brute-force
+4. ...
+
+No jest tego mnóstwo :)
+Ludzie wolą raczej nie mysleć o bezpieczeństwie póki nie muszą i to widać dopiero (niestety) na produkcji.
+
+Nawet nie zaczynam rantu o niezałatanych XSS'ach czy SQL injection :D
