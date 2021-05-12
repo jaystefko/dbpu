@@ -1,0 +1,26 @@
+Zrobiłem mniej zaawansowaną funkcję (liczę silnię), ale zakładam że
+samo skomplikowanie obliczeniowe nie jest źródłem problemnu rozważanego.
+Dodałem za to wersje rekursywne jak i iteracyjne by móc porównać
+jak różne języki radzą sobie z rekursją jakby ktoś chciał się porwać na tak nierozważne rozwiązanie :)
+
+Wszystkie pliki są w katalogu '4-5'. Wyniki z mojej maszyny załączam poniżej:
+1. C (gcc version 10.2.0 (Ubuntu 10.2.0-13ubuntu1)), komendy: `gcc main.c` => `./a.out`
+    Iterative time duration: 2.302000ms
+    Recursive time duration: 9.212000ms
+2. C++ (gcc version 10.2.0 (Ubuntu 10.2.0-13ubuntu1) - nie wiem czemu przy `g++ -v` wyskakuje mi gcc, ale wklejem), komendy: `g++ main.cpp` => `./a.out`
+    Iterative time duration: 2.308ms
+    Recursive time duration: 9.676ms
+3. JS (node v14.16), command: `node main.js`
+    Iterative:: 4.795ms
+    Recursive:: 28.573ms
+4. Python (Python 3.8.6), command: `python3 main.py`
+    Iterative:  1644.409 ms
+    Rekursja się wywaliła bo przekroczyłem maksymalną ilość wywołań (#tenJęzykToŻart, jego jedyną zaletą jest pozorna prostota)
+
+Ale ciekawi mnie w sumie czy na każdej maszynie czy na każdym kompilatorze wyniki będą
+miały te same tendencje także jakby się u Pana coś mocno z moimi nie zgadzało to proszę o kontakt!
+
+W tym układzie jaki testuję oprócz śmiesznych węży które udają sensowny język nie widzę zagrożeń
+dla poprawności wykonywania.
+
+Wiem że dla C/C++ są dostępne flagi optymalizacyjne i możliwości przyspieszenia, ale na potrzeby tego eksperymentu pomijam te sprawy.

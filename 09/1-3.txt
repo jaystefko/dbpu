@@ -1,0 +1,12 @@
+Plik main.c :)
+
+1. co to daje
+    * Akronim znaczy: Chińska teoria reszt i jest ona wykorzystywana do zwiekszenia prędkości RSA.
+    * Wiele bibliotek (np. Open SSL czy Java) korzysta z niej przy dekrypcji i logowaniu.
+    * źródła
+        > https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+        > https://www.di-mgt.com.au/crt_rsa.html
+
+2. niebezpieczeństwa CRT
+    * podatność na timing attack
+    * możliwy wyciek informacji (Boneh i Brumley z 2003 - https://crypto.stanford.edu/~dabo/abstracts/ssl-timing.html)
