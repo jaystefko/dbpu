@@ -1,0 +1,16 @@
+Cóż... Zcedowanie tego na zaufaną stronę moim zdaniem jest najprostszym sposobem stosowanym do tego czasu wszędzie.
+Jeśli byłbym w stanie wymyślić na szybko coś innego jako losowy ludzik na uczelni to zakładam że wszystkie wybory do
+tej pory nie wyglądałyby tak jak wyglądają.
+Pozostawienie autoryzacji na zasadzie dowodu osobistego w urzędzie po którym urzędnik daje nam wygenerowany jednorazowy kod do założenia
+konta jest nieprzyjaznym dla użytkownika ale na ten moment i tak ostatecznym sposobem.
+Także taki właśnie proponuję na ten moment.
+
+W ogóle to (side note) scedowanie autoryzacji na zaufaną publicznie instytucję ma dużo zalet o czym się ostatnio przekonałem.
+Naprzykład ostatnio robiąc apki webowe z logowaniem praktycznie nie korzystam z własnego logowania tylko i wyłącznie
+z google/facebook/tweeter/github etc auth i powiem Panu że polecam strasznie!
+1. Brak DDoS bo zanim padniemy my padnie większy portal a oni się tym bardzo przejmują
+2. Auto synchronizacja jakichśtam obrazków, wieków etc (użytkownicy to lubią)
+3. Obrazki pobrane odrazu z serwisu autoryzacyjnego (to też odpada do zrobienia)
+4. Porno/przemoc na obrazkach użytkowników i pozwy dla portalu? Nigdy! najpierw musieliby przejść to o poziom wyżej - duuuży plus
+
+Jeszcze parę by się wymyśliło, ale naprawdę jestem zachwyconym scedowiczem :D

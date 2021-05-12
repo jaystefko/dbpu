@@ -1,0 +1,21 @@
+To pytanie rozbiję na 2 podtematy:
+
+1. Ochrona przed kopiowaniem kodu (wychodzę z doświadczenia front-end'owca)
+    * zaciemnianie kodu
+    * budowanie 1 statycznego build'a (przykład: webpack dla JS'a ->
+        pakuje cały JS, zaciemnia jak to ustawimy, dzieli na łykalne paczki i takie bloki kodu mamy do importowania)
+    * nie trzymanie jakichkolwiek konfiguracji, url'i etc w plikach tylko wstrzykiwanie ich np w proces na
+        jakim aplikacja jest odtwarzana (docker ułatwia bardzo)
+
+2. Ochrona przed kopiowaniem kontentu
+    * znaki wodne na zdjęciach (stocki zdjęciowe tak się bronią, to musi być nierozdzielalny layer i musi ich być na tyle
+        dużo żeby usunięcie ich było dłuższe i trudniejsze niż kupienie zdjęcia)
+    * DRM'y na VOD (osobny serwer autoryzujący czy dany użytkownik może odtworzyć dane video, najpopularniejszym
+        systemem szyfrowania jest widevine ale jest też fairplay i wieeele innych, przydatne coś generalnie - polecam)
+    * nie pracowałem na ten moment z czystym dźwiękiem trakże się nie wypowiem
+
+3. Ochrona przed zmianami w aplikacji
+    Nie do końca zrozumiałem tej części pytania, więc odpowiem jak zrozumiałem
+    Żeby obronić się przed atakami persistent XSS (o to chyba jest pytanie)
+    bardzo dobrze jest oczyszczać wszelakiego typu dane zewnętrzne (z innych
+    serwisów czy też od użytkowników) - teksty, zdjęcia, cokolwiek, nie ufaj niczemu!

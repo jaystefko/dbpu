@@ -1,0 +1,1 @@
+alert tcp any 80 -> any any (content:"Expires";content:"Fri, 13";http_header;sid:323;)

@@ -1,0 +1,9 @@
+NASZ (Narodowy Algorytm Szyfrujący) – algorytm szyfrujący o niejawnej specyfikacji,
+stosowany do ochrony informacji niejawnych stanowiących tajemnicę służbową, oznaczonych klauzulą „poufne”.
+Według nieoficjalnych danych algorytm oparty jest o 3DES z funkcją whiteningu,
+której celem jest upodobnienie sygnału wyjściowego do białego szumu. Obecnie algorytm jest implementowany
+wyłącznie w sprzętowych układach szyfrujących urządzeń polskich producentów.
+Wersje tych urządzeń zawierające implementacje algorytmu NASZ przygotowywane są we współpracy z
+Departamentem Bezpieczeństwa Teleinformatycznego Agencji Bezpieczeństwa Wewnętrznego, który jest właścicielem algorytmu.
+
+// źródło: https://pl.wikipedia.org/wiki/Narodowy_algorytm_szyfruj%C4%85cy

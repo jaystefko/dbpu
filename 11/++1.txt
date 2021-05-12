@@ -1,0 +1,13 @@
+Opiszę to jak działają dobrze pokonfigurowane paczkomaty dla JS'a bo na tym się znam :)
+1. Weź kod
+2. Podmień nowy kod na starszy żeby każda przeglądarka mogła odczytać stronę w ten sam sposób (dla JS webpack, dla CSS własny stubbing)
+    To przyspiesza development bo można pisać z nowymi strzałkami i innymi pierdołami a nie wykluczamy tych 3 biednych użytkowników IE8 :)
+3. Zacieniamy kod i tworzymy z niego 1 wielki blok
+4. Dzielimy bloki na takie żeby łatwo było je pobrać w przeglądarce
+
+Cechy:
+1. Popularna, łatwo znaleźć poradniki, dokumentacje etc
+2. Wspierana - popularność gwarantuje że jakaśtam przeglądarka nie zacznie nam wywalać aplikacji jak wszystko dobrze zrobimy
+3. Dość prosta do zrozumienia
+4. Żmudna konfiguracja - żeby to tak ładnie poustawiać trzeba mieć lvl master w dokumentacji tych paczkomatów
+5. Duże pliki konfiguracyjne - potem w projekcie w rootDir mamy kilka(dziesiąt) plików konfiguracyjnych i wygląda to strasznie
